@@ -20,9 +20,10 @@ This Node-RED node allows you to control RGB lights through OpenRGB server using
 
 Restart Node-RED to load the new node.
 
-Usage
+## Usage
 
 Drag and drop the "OpenRGB" node from the palette onto your Node-RED workspace.
+
 Configure the node by setting the desired parameters:
   Server IP: IP address of the OpenRGB server.
   Server Port: Port number used by the OpenRGB server (default: 6742).
@@ -35,30 +36,29 @@ Configure the node by setting the desired parameters:
 Connect the input to the OpenRGB node to trigger the desired action.
 Deploy the flow.
 
-Examples
+## Examples
   Set Color Example
     This example demonstrates how to set the color of an RGB device using the OpenRGB node.
 
-Configure the OpenRGB node:
-  Method: setColor
-  Device ID: ID of the target RGB device
-  Color: Desired color in hexadecimal format (e.g., #00FF00 for green)
-
-  Deploy the flow and observe the RGB device changing to the specified color.
+   Configure the OpenRGB node:
+     Method: setColor
+     Device ID: ID of the target RGB device
+     Color: Desired color in hexadecimal format (e.g., #00FF00 for green)
+   
+     Deploy the flow and observe the RGB device changing to the specified color.
 
 Set Effect Speed Example
   This example demonstrates how to set the effect speed of an RGB device using the OpenRGB node.
 
-Configure the OpenRGB node:
-
-Method: setEffectSpeed
-  Device ID: ID of the target RGB device
-  Speed: Desired effect speed (e.g., 10)
-  
+  Configure the OpenRGB node:
+     Method: setEffectSpeed
+       Device ID: ID of the target RGB device
+       Speed: Desired effect speed (e.g., 10)
+        
   Deploy the flow and observe the effect speed of the RGB device adjusting accordingly.
 
 
 
 
-License
+## License
 This project is licensed under the MIT License.
