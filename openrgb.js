@@ -1,81 +1,37 @@
-module.exports = function(RED) {
+module.exports = function (RED) {
     function OpenRGBNode(config) {
         RED.nodes.createNode(this, config);
+        var node = this;
 
-        const serverIP = config.serverIP;
-        const serverPort = config.serverPort;
-        const method = config.method;
-        const deviceID = config.deviceID;
-        const color = config.color;
-        const effect = config.effect;
-        const speed = config.speed;
+        node.serverIP = config.serverIP;
+        node.serverPort = config.serverPort;
+        node.method = config.method;
+        node.deviceID = config.deviceID;
+        node.color = config.color;
+        node.effect = config.effect;
+        node.speed = config.speed;
 
-        this.on('input', function(msg) {
-            // Use the configured parameters or fall back to the input message
-            const deviceIDToUse = deviceID || msg.payload.deviceID;
-            const colorToUse = color || msg.payload.color;
-            const effectToUse = effect || msg.payload.effect;
-            const speedToUse = speed || msg.payload.speed;
+        node.on('input', function (msg) {
+            // Get the values from the node's config or the input message (if available)
+            var serverIP = node.serverIP || msg.serverIP;
+            var serverPort = node.serverPort || msg.serverPort;
+            var method = node.method || msg.method;
+            var deviceID = node.deviceID || msg.deviceID;
+            var color = node.color || msg.color;
+            var effect = node.effect || msg.effect;
+            var speed = node.speed || msg.speed;
 
-            try {
-                const client = require('net').Socket();
-                client.connect(serverPort, serverIP, function() {
-                    // Build and send the command based on the selected method
-                    let command;
-                    switch (method) {
-                        case 'setColor':
-                            command = buildSetColorCommand(deviceIDToUse, colorToUse, effectToUse);
-                            break;
-                        case 'setEffectSpeed':
-                            command = buildSetEffectSpeedCommand(deviceIDToUse, speedToUse);
-                            break;
-                        // Add cases for other supported methods as needed
-
-                        default:
-                            console.error('Invalid method:', method);
-                            return;
-                    }
-
-                    client.write(command);
-                    client.end();
-                });
-
-                client.on('error', function(err) {
-                    console.error('An error occurred:', err);
-                });
-            } catch (err) {
-                console.error('An error occurred:', err);
+            // Perform the OpenRGB SDK action based on the configured method
+            // Replace the following code with your OpenRGB SDK implementation
+            if (method === 'setColor') {
+                console.log(`Setting color to ${color} for device ${deviceID}`);
+            } else if (method === 'setEffectSpeed') {
+                console.log(`Setting effect speed to ${speed} for device ${deviceID}`);
             }
+
+            // You can also output the results or pass along the input message
+            // if needed using `node.send(msg);`
         });
-
-        function buildSetColorCommand(deviceID, color, effect) {
-            const command = {
-                mode: effect ? 2 : 1, // 1 for static color, 2 for effect
-                deviceType: 0x01, // 0x01 for keyboard, modify if needed
-                zoneID: deviceID, // Modify if needed based on your OpenRGB device
-                color: {
-                    r: color[0],
-                    g: color[1],
-                    b: color[2]
-                }
-            };
-
-            return JSON.stringify(command);
-        }
-
-        function buildSetEffectSpeedCommand(deviceID, speed) {
-            const command = {
-                mode: 2, // 2 for effect
-                deviceType: 0x01, // 0x01 for keyboard, modify if needed
-                zoneID: deviceID, // Modify if needed based on your OpenRGB device
-                speed: speed
-            };
-
-            return JSON.stringify(command);
-        }
-
-        // Add additional helper functions for other supported methods as needed
     }
-
     RED.nodes.registerType('openrgb', OpenRGBNode);
 };
