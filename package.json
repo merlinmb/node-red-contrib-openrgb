@@ -1,0 +1,15 @@
+{
+  "name": "node-red-contrib-openrgb",
+  "version": "1.0.0",
+  "description": "Custom Node-RED library for OpenRGB integration",
+  "keywords": [
+    "node-red",
+    "openrgb"
+  ],
+  "author": "Mark Beets",
+  "license": "ISC",
+  "dependencies": {
+    "net": "^1.0.2",
+    "openrgb-sdk": "^1.0.0"
+  }
+}

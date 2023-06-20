@@ -1,0 +1,51 @@
+<script type="text/javascript">
+    RED.nodes.registerType('openrgb', {
+        category: 'function',
+        color: '#a6bbcf',
+        defaults: {
+            name: { value: 'openrgb' },
+            serverIP: { value: '192.168.1.148', required: true },
+            serverPort: { value: 6742, required: true },
+            method: { value: 'setColor', required: true },
+            deviceID: { value: 0, required: true },
+            color: { value: '#FF0000', required: true },
+            effect: { value: false, required: true },
+            speed: { value: 10, required: true }
+        },
+        inputs: 1,
+        outputs: 0,
+        icon: "config.png",
+        label: function() {
+            return this.name || 'OpenRGB';
+        },
+        labelStyle: function() {
+            return this.name ? "node_label_italic" : "";
+        },
+        oneditprepare: function() {
+            var serverIP = this.serverIP || '192.168.1.148';
+            var serverPort = this.serverPort || 6742;
+            var method = this.method || 'setColor';
+            var deviceID = this.deviceID || 0;
+            var color = this.color || '#FF0000';
+            var effect = this.effect || false;
+            var speed = this.speed || 10;
+
+            $("#node-input-serverIP").val(serverIP);
+            $("#node-input-serverPort").val(serverPort);
+            $("#node-input-method").val(method);
+            $("#node-input-deviceID").val(deviceID);
+            $("#node-input-color").val(color);
+            $("#node-input-effect").prop("checked", effect);
+            $("#node-input-speed").val(speed);
+        },
+        oneditsave: function() {
+            this.serverIP = $("#node-input-serverIP").val();
+            this.serverPort = $("#node-input-serverPort").val();
+            this.method = $("#node-input-method").val();
+            this.deviceID = $("#node-input-deviceID").val();
+            this.color = $("#node-input-color").val();
+            this.effect = $("#node-input-effect").prop("checked");
+            this.speed = $("#node-input-speed").val();
+        }
+    });
+</script>
