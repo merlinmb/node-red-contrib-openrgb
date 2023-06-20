@@ -46,6 +46,47 @@
             this.color = $("#node-input-color").val();
             this.effect = $("#node-input-effect").prop("checked");
             this.speed = $("#node-input-speed").val();
+        },
+        oneditcancel: function() {
+            // Handle any cleanup or reset operations if needed
+        },
+        render: function () {
+            return (
+                <div>
+                    <div className="form-row">
+                        <label htmlFor="node-input-serverIP"><i className="fa fa-server"></i> Server IP</label>
+                        <input type="text" id="node-input-serverIP" placeholder="192.168.1.148" style={{ width: '75%' }} required />
+                    </div>
+                    <div className="form-row">
+                        <label htmlFor="node-input-serverPort"><i className="fa fa-sitemap"></i> Server Port</label>
+                        <input type="number" id="node-input-serverPort" placeholder="6742" required />
+                    </div>
+                    <div className="form-row">
+                        <label htmlFor="node-input-method"><i className="fa fa-wrench"></i> Method</label>
+                        <select id="node-input-method">
+                            <option value="setColor">setColor</option>
+                            <option value="setEffectSpeed">setEffectSpeed</option>
+                            {/* Add other supported methods as needed */}
+                        </select>
+                    </div>
+                    <div className="form-row">
+                        <label htmlFor="node-input-deviceID"><i className="fa fa-keyboard-o"></i> Device ID</label>
+                        <input type="number" id="node-input-deviceID" placeholder="0" required />
+                    </div>
+                    <div className="form-row">
+                        <label htmlFor="node-input-color"><i className="fa fa-paint-brush"></i> Color</label>
+                        <input type="color" id="node-input-color" required />
+                    </div>
+                    <div className="form-row">
+                        <label htmlFor="node-input-effect"><i className="fa fa-magic"></i> Effect</label>
+                        <input type="checkbox" id="node-input-effect" />
+                    </div>
+                    <div className="form-row">
+                        <label htmlFor="node-input-speed"><i className="fa fa-tachometer"></i> Speed</label>
+                        <input type="number" id="node-input-speed" placeholder="10" required />
+                    </div>
+                </div>
+            );
         }
     });
 </script>
