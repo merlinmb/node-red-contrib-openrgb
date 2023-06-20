@@ -10,6 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "net": "^1.0.2",
-    "openrgb-sdk": "^1.0.0"
+    "openrgb-sdk": "^0.5.2"
   }
 }
